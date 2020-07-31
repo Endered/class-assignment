@@ -5,7 +5,11 @@
        (list "Heads" "Tails")))
 
 (defun main (time)
-  (let ((heads 0))
+  (let ((user-name
+          (progn (format t "Who are you?~%> ")
+                 (read-line)))
+        (heads 0))
+    (format t "Hello, ~a!~%" user-name)
     (format t "Tossing a coin...~%")
     (loop for cnt from 1 to time 
           for res = (toss-coin)
@@ -14,6 +18,11 @@
           do (format t "Round ~a: ~a~%" cnt res))
     (format t "Heads: ~a, Tails: ~a~%"
             heads
-            (- time heads))))
+            (- time heads))
+    (format t "~a ~a~%"
+            user-name
+            (if (> heads (- time heads))
+                "won!"
+                "lost"))))
 
 (main 3)
